@@ -125,6 +125,12 @@ function generateMarkdown(data) {
     document += `## Testing\n${data.testing}\n`;
   }
 
+  // If contact email is provided, add
+  // to README document
+  if (data.questions) {
+    document += `## Questions\nFor all questions about this repository and its contents, please reach out at [${data.questions}](mailto:${data.questions}).\n`;
+  }
+
   // If information about how to contibute was
   // provided, add to README document
   if (data.contribution) {
