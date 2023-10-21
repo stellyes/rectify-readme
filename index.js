@@ -78,6 +78,17 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
+  // Checks if output folder exists, creates
+  // new folder if it doesn't
+  if (!fs.existsSync(`./output`)) {
+    fs.mkdir(`./output`, (err) => {
+      if (err) {
+        console.error(`Error creating folder: ${err.message}`);
+      }
+    });
+  }
+
+  // Writes to file output/README_projectname.md
   fs.writeFile(`output/${fileName}`, data, (err) => {
     if (err) {
       console.error(err);

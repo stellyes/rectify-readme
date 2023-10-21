@@ -136,7 +136,7 @@ function generateMarkdown(data) {
 
   // Add author section to README document
   document += `## Author
-  ${data.fullname} - [Github](https://github.com/${data.github})`;
+${data.fullname} - [Github](https://github.com/${data.github})`;
 
   return document;
 }
