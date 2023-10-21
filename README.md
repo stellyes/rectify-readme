@@ -11,8 +11,11 @@ After cloning the repository, navigate to the corresponding directory in your te
 ## Usage
 
 To use the application, run `node index.js` in the file's corresponding directory. Then, you'll be prompted to input your project information.
+
 [![ezgif-com-video-to-gif.gif](https://i.postimg.cc/K885fVwK/ezgif-com-video-to-gif.gif)](https://postimg.cc/dLgdtWqv)
+
 In the output folder that was generated, you should find your README file named `README_project-name-here.md`.
+
 [![ezgif-com-video-to-gif-2.gif](https://i.postimg.cc/PrxLRjfk/ezgif-com-video-to-gif-2.gif)](https://postimg.cc/z3sXy4Rd)
 
 ## Features
