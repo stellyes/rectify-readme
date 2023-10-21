@@ -63,12 +63,33 @@ This repository is licensed under ${license}. For more information, [click here]
   }
 }
 
+function renderTableOfContents(data) {
+  let tempDocument = "## Table of Contents\n";
+  for (const key in data) {
+    // Not inclusive of sections without equivalent
+    // section ID
+    if (
+      key !== "title" &&
+      key !== "description" &&
+      key !== "fullname" &&
+      key !== "github"
+    ) {
+      // Capitalize first letter of section for display, make link with key value
+      let sectionTitle = key[0].toUpperCase() + key.slice(1);
+      tempDocument += `- [${sectionTitle}](#${key})\n`;
+    }
+  }
+  // Since Author section is inclusive of fullname and github tags
+  // both, added manually since author key does not exist
+  tempDocument += `- [Author](#author)\n`;
+  return tempDocument;
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   //Initialize markdown string
   let document = `# ${data.title}\n## Description\n${data.description}\n`;
 
-  let tableOfContents = false;
   let sectionCount = 1; // Set to 1 to include About section by default
   for (const key in data) {
     if (
@@ -78,35 +99,12 @@ function generateMarkdown(data) {
       key !== "github" &&
       // Ensures right keys are being checked
       // and that data.key is truthy (has value)
-      data.key
+      data[key]
     ) {
       sectionCount++;
       if (sectionCount === 4) {
-        tableOfContents = true;
+        document += renderTableOfContents(data);
       }
-    }
-  }
-
-  // If table of contents flag was set to true...
-  if (tableOfContents) {
-    // add table of contents to README document
-    document += "## Table of Contents\n";
-    for (const key in data) {
-      // Not inclusive of sections without equivalent
-      // section ID
-      if (
-        key !== "title" &&
-        key !== "description" &&
-        key !== "fullname" &&
-        key !== "github"
-      ) {
-        // Capitalize first letter of section for display, make link with key value
-        let sectionTitle = key[0].toUpperCase() + key.slice(1);
-        document += `- [${sectionTitle}](#${key})\n`;
-      }
-      // Since Author section is inclusive of fullname and github tags
-      // both, added manually since author key does not exist
-      document += `[Author](#author)\n`;
     }
   }
 
@@ -134,7 +132,7 @@ function generateMarkdown(data) {
   // If information about how to contibute was
   // provided, add to README document
   if (data.contribution) {
-    document += `## How to Contribute\n${data.contribution}\n`;
+    document += `## Contribution\n${data.contribution}\n`;
   }
 
   // Add license section to README document
